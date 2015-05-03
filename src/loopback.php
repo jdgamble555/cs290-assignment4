@@ -1,8 +1,11 @@
 <?php
-if (!$_REQUEST) $_REQUEST = null;
 
-foreach ($_REQUEST as $k => $v)
-    if (!$_REQUEST[$k]) $_REQUEST[$k] = undefined;
+$params = ${'_'.$_SERVER['REQUEST_METHOD']};
 
-echo json_encode(array("Type" => $_SERVER['REQUEST_METHOD'], "parameters" => $_REQUEST));
+if (empty($params)) $params = null;
+
+foreach ($params as $k => $v)
+    if (!$params[$k]) $params[$k] = undefined;
+
+echo json_encode(array("Type" => $_SERVER['REQUEST_METHOD'], "parameters" => $params));
 ?>
